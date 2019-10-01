@@ -3,15 +3,16 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { Rate } from 'antd';
 import { Visible, Row, Col } from 'react-grid-system';
 import { Card, CardHeader, CardBody } from 'reactstrap';
-import { Card as SemanticCard, TextArea, Dimmer, Loader, Segment, Icon, Button, Comment, Form, Header, Item } from 'semantic-ui-react';
+import { Card as SemanticCard, TextArea, Dimmer, Loader, Segment, Icon, Button, Comment, Form, Header } from 'semantic-ui-react';
 import * as actions from '../../../store/actions';
 import { Review, ItemDetails } from '../../../components/UserPage/BookDetails/BookDetails';
 import ShareButton from 'react-social-share-buttons';
 import { successNotification, errorNotification } from '../../../components/UI/Message/Message';
+import PropTypes from 'prop-types';
 
 const BookDetails = props => {
   const dispatch = useDispatch();
-  const { fetchError, fetchSuccess, fetchLoading } = useSelector(state => ({
+  const { fetchLoading } = useSelector(state => ({
     fetchError: state.library.fetch.error,
     fetchSuccess: state.library.fetch.success,
     fetchLoading: state.library.fetch.loading
@@ -50,7 +51,6 @@ const BookDetails = props => {
   }
   useEffect(() => {
     if (book) {
-      console.log("updating reviews!!")
       setReview(review => ({
         ...review,
         rating: book.reviews[localStorage.userId].rating,
@@ -60,28 +60,24 @@ const BookDetails = props => {
   }, [book])
 
   useEffect(() => {
-    console.log("issueSuccess")
     if (issueSuccess) {
       successNotification("Your book is issued successfully");
     }
   }, [issueSuccess, issueLoading])
 
   useEffect(() => {
-    console.log("issueError")
     if (issueError) {
       errorNotification(issueError);
     }
   }, [issueError, issueLoading])
 
   useEffect(() => {
-    console.log("reviewSuccess")
     if (reviewSuccess) {
       successNotification("Successfully updated your review..!");
     }
   }, [reviewSuccess, reviewLoading])
 
   useEffect(() => {
-    console.log("reviewError")
     if (reviewError) {
       errorNotification(reviewError);
     }
@@ -96,7 +92,7 @@ const BookDetails = props => {
     return (mm + '/' + dd + '/' + y);
   }
 
-  const issueBook = book => {
+  const issueBook = () => {
     const issuedBook = {
       isbn: book.isbn,
       title: book.title,
@@ -105,7 +101,7 @@ const BookDetails = props => {
       issuedDate: dateFormat(0),
       returnDate: dateFormat(15)
     }
-    dispatch(bookActions.issueBook(issuedBook, book.available))
+    dispatch(actions.issueBook(issuedBook, book.available))
   }
 
   let issuedIsbnArray = [];
@@ -119,9 +115,6 @@ const BookDetails = props => {
   }
 
   const issued = issuedIsbnArray.includes(isbn) ? true : false;
-  if (book) {
-    console.log(book)
-  }
   if (book && book.reviews) {
     Object.keys(book.reviews).forEach(key => {
       userReviews.push(book.reviews[key]);
@@ -129,7 +122,7 @@ const BookDetails = props => {
   }
   let userComments = <h4>No comments availabe</h4>;
 
-  if (userReviews) {
+  if (userReviews.length) {
     userComments = userReviews.map(review => <Review key={review.user} review={review} />);
   }
 
@@ -164,11 +157,11 @@ const BookDetails = props => {
                     <SemanticCard.Header>Share</SemanticCard.Header>
                     <SemanticCard.Description>
                       <Row align="center">
-                        {socialMediaShare.map(site => <Col align="center">
+                        {socialMediaShare.map(site => <Col align="center" key={site}>
                           <ShareButton
                             compact
                             socialMedia={site}
-                            url={"http://localhost:8080/#" + props.location.pathname}
+                            url={`http://${process.env.AUTH_DOMAIN}/#${props.location.pathname}`}
                             media={"https://imgs.xkcd.com/comics/error_code.png"}
                             text="My Library"
                           />
@@ -215,4 +208,11 @@ const BookDetails = props => {
     </div>
   )
 }
+
+BookDetails.propTypes = {
+  match: PropTypes.object,
+  location: PropTypes.object,
+  myName: PropTypes.string
+};
+
 export default BookDetails;

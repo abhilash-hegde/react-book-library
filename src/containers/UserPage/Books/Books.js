@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { Dropdown, Message, Icon } from 'semantic-ui-react';
-import { Visible, Hidden, Row, Col } from 'react-grid-system';
+import { Visible, Row, Col } from 'react-grid-system';
 import { Card, CardHeader, CardBody, Table } from 'reactstrap';
 import Book from '../../../components/UserPage/Book/Book';
 import MBook from '../../../components/UserPage/Book/mBook';
 import * as bookActions from '../../../store/actions';
 import { successNotification, errorNotification } from '../../../components/UI/Message/Message';
+import PropTypes from 'prop-types';
 
 const Books = props => {
   const [genreFilter, setGenreFilter] = useState('All');
 
-  const { fetchError, fetchSuccess, fetchLoading } = useSelector(state => ({
+  const { fetchError, fetchLoading } = useSelector(state => ({
     fetchError: state.library.fetch.error,
     fetchSuccess: state.library.fetch.success,
     fetchLoading: state.library.fetch.loading
@@ -37,14 +38,12 @@ const Books = props => {
   }, []);
 
   useEffect(() => {
-    console.log("issueSuccess")
     if (issueSuccess) {
       successNotification("Your book is issued successfully");
     }
   }, [issueSuccess, issueLoading])
 
   useEffect(() => {
-    console.log("issueError")
     if (issueError) {
       errorNotification(issueError);
     }
@@ -68,7 +67,6 @@ const Books = props => {
       issuedDate: dateFormat(0),
       returnDate: dateFormat(15)
     }
-    console.log(issuedBook);
     dispatch(bookActions.issueBook(issuedBook, book.available))
   }
 
@@ -89,7 +87,7 @@ const Books = props => {
     );
   } else if (fetchError) {
     bookBody = (<Message negative>
-      <Message.Header>We're sorry!</Message.Header>
+      <Message.Header>{`We're sorry!`}</Message.Header>
       <p>{fetchError}</p>
     </Message>);
   } else {
@@ -104,7 +102,7 @@ const Books = props => {
         booksArray.push(libraryBooks[key]);
       });
 
-      booksArray.map((book) => {
+      booksArray.forEach((book) => {
         if (!genre.includes(book.genre)) {
           genre.push(book.genre)
         }
@@ -142,7 +140,7 @@ const Books = props => {
       </Table>);
 
       const booksSmallScr = (
-        booksArray.map(book => <Col align='center' sm={6} style={{ "marginTop": "10px", "marginBottom": "5px" }}>
+        booksArray.map(book => <Col key={book.isbn} align='center' sm={6} style={{ "marginTop": "10px", "marginBottom": "5px" }}>
           <MBook key={book.isbn} book={book}
             issueBook={book => issueBook(book)}
             onClickEvent={isbn => props.history.push('/user/bookDetails/' + isbn)}
@@ -161,7 +159,6 @@ const Books = props => {
             <Dropdown.Item onClick={() => setGenreFilter("All")} key={'All'}>All</Dropdown.Item>
             {
               genre.map(key => {
-                console.log(key);
                 return (<Dropdown.Item onClick={(e, genre) => setGenreFilter(genre.children)} key={key}>{key}</Dropdown.Item>);
               })
             }
@@ -201,6 +198,10 @@ const Books = props => {
       </Row>
     </div>
   )
+}
+
+Books.propTypes = {
+  history: PropTypes.object
 }
 
 export default Books;

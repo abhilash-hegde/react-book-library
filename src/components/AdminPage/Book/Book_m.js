@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Image } from 'semantic-ui-react';
 import { Rate } from 'antd';
+import PropTypes from 'prop-types'
 
 const Book_m = props => {
   return (
@@ -17,6 +18,11 @@ const Book_m = props => {
       </Card.Content>
     </Card>
   )
+}
+
+Book_m.propTypes = {
+  onClickEvent: PropTypes.func,
+  book: PropTypes.object
 }
 
 export default Book_m;

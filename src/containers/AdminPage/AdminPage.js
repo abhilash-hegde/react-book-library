@@ -7,7 +7,6 @@ import Breadcrumb from '../../components/UI/Breadcrumb';
 import Footer from '../../components/UI/Footer/';
 import Books from './Books/Books';
 import Profile from '../../containers/Profile/Profile';
-import Logout from '../../containers/Auth/Logout';
 import Users from './Users/Users';
 import BooksIssued from './BooksIssued/BooksIssued';
 import EditBook from './EditBook/EditBook';

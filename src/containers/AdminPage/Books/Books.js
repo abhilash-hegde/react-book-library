@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { Dropdown, Message, Icon, Embed, Grid, Input } from 'semantic-ui-react';
-import isEqual from "react-fast-compare";
-import { Visible, Hidden, Row, Col } from 'react-grid-system';
+import { Dropdown, Message, Icon, Grid, Input } from 'semantic-ui-react';
+import { Visible, Row, Col } from 'react-grid-system';
 import _ from 'lodash';
 import {
   Card,
@@ -13,6 +12,7 @@ import {
 import Book from '../../../components/AdminPage/Book/Book';
 import BookM from '../../../components/AdminPage/Book/Book_m';
 import * as actions from '../../../store/actions';
+import PropTypes from 'prop-types'
 
 const searchFilterOptions = [
   { key: 'author', text: 'Author', value: 'author' },
@@ -21,8 +21,6 @@ const searchFilterOptions = [
 ]
 
 const Books = props => {
-  // const [genres, setGenres] = useState({});
-  // const [authors, setAuthors] = useState({});
   const [genreFilter, setGenreFilter] = useState("All");
   const [searchFilter, setSearchFilter] = useState("author");
   const [filteredBooks, setFilteredBooks] = useState(null);
@@ -43,8 +41,6 @@ const Books = props => {
   }, [])
 
   const filterBook = () => {
-    console.log("filterBook");
-    console.log(books);
     if (books) {
       let booksArray = [];
       Object.keys(books).forEach(key => {
@@ -103,10 +99,10 @@ const Books = props => {
   if (!loading) {
     if (error) {
       bookBody = (<Message negative>
-        <Message.Header>We're sorry!</Message.Header>
+        <Message.Header>{`We're sorry!`}</Message.Header>
         <p>{error}</p>
       </Message>);
-    } else if (success && filteredBooks) {
+    } else if (success && books.length) {
       const bookBigScr = (<Table hover responsive className="table-outline mb-0 d-none d-sm-table">
         <thead className="thead-light">
           <tr>
@@ -120,16 +116,14 @@ const Books = props => {
         </thead>
         <tbody>
           {filteredBooks.map((book) => <Book key={book.isbn} book={book}
-            issueBook={(book) => issueBook(book)}
             onClickEvent={isbn => props.history.push('/admin/editBook/' + isbn)} />
           )}
         </tbody>
       </Table>);
 
       const bookSmallScr = filteredBooks ? (filteredBooks.map((book) =>
-        <Col align='center' sm={6} style={{ "marginTop": "10px", "marginBottom": "3px" }}>
+        <Col key={book.isbn} align='center' sm={6} style={{ "marginTop": "10px", "marginBottom": "3px" }}>
           <BookM key={book.isbn} book={book}
-            issueBook={(book) => issueBook(book)}
             onClickEvent={isbn => props.history.push('/admin/editBook/' + isbn)} />
         </Col>)) : <Message warning>
           <Message.Header> Sorry</Message.Header>
@@ -180,7 +174,6 @@ const Books = props => {
                     key={'All'}>All</Dropdown.Item>
                   {
                     categories.map(category => {
-                      console.log(category);
                       return (<Dropdown.Item selected={genreFilter == category}
                         onClick={(e, { children }) => setGenreFilter(children)} key={category}>{category}</Dropdown.Item>);
                     })
@@ -208,7 +201,7 @@ const Books = props => {
         <Visible md lg xl>{bookBigScr} </Visible>
       </div>
       );
-    } else if (success && !books) {
+    } else if (success && !books.length) {
       bookBody = (
         <Message warning>
           <Message.Header> Empty!</Message.Header>
@@ -233,5 +226,9 @@ const Books = props => {
       </Row>
     </div>
   )
+}
+
+Books.propTypes = {
+  history: PropTypes.object
 }
 export default Books;

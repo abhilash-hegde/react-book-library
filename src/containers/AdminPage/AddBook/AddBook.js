@@ -7,25 +7,22 @@ import {
 } from 'reactstrap';
 import { Message, Icon } from 'semantic-ui-react';
 import * as actions from '../../../store/actions';
-
 import SearchBook from '../../../components/AdminPage/AddBook/SearchBook';
 import EditBookDetails from '../../../components/AdminPage/AddBook/EditBookDetails';
 
-function Users(props) {
+const Users = () => {
   const [editPage, setEditPage] = useState(false);
   const [manualEdit, setManualEdit] = useState(false);
   const [isbn, setIsbn] = useState("");
 
   const dispatch = useDispatch();
-  const { gApiBooks, gApiLoading, gApiError, gApiSuccess } = useSelector(state => ({
-    gApibooks: state.bookAdmin.fetchGoogleApi.books,
+  const { gApiLoading, gApiError, gApiSuccess } = useSelector(state => ({
     gApiLoading: state.bookAdmin.fetchGoogleApi.loading,
     gApiError: state.bookAdmin.fetchGoogleApi.error,
     gApiSuccess: state.bookAdmin.fetchGoogleApi.success,
   }), shallowEqual);
 
-  const { addloading, addError, addSuccess } = useSelector(state => ({
-    addLoading: state.bookAdmin.add.loading,
+  const { addError, addSuccess } = useSelector(state => ({
     addError: state.bookAdmin.add.error,
     addSuccess: state.bookAdmin.add.success,
   }), shallowEqual);
@@ -49,7 +46,6 @@ function Users(props) {
   }
 
   const EditPageComp = useMemo(() => {
-    console.log("EditPageComp")
     if (isbn && (editPage || manualEdit)) {
       return (<div>
         <EditBookDetails
@@ -84,7 +80,7 @@ function Users(props) {
       );
     } else if (gApiError) {
       return (<Message negative>
-        <Message.Header>We're sorry!</Message.Header>
+        <Message.Header>{`We're sorry!`}</Message.Header>
         <p>{gApiError}</p>
       </Message>);
     }

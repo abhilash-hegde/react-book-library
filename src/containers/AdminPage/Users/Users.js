@@ -4,13 +4,13 @@ import { Row, Col, Card, CardHeader, CardBody } from 'reactstrap';
 import { Message, Icon } from 'semantic-ui-react';
 import * as actions from '../../../store/actions/';
 import User from '../../../components/AdminPage/User/User';
+import PropTypes from 'prop-types';
 
 const Users = props => {
   const dispatch = useDispatch();
   const { loading, error } = useSelector(state => ({ loading: state.users.fetch.loading, error: state.users.fetch.error, success: state.users.fetch.success }))
   const users = useSelector(state => state.users.users);
 
-  console.log(users);
   useEffect(() => {
     dispatch(actions.fetchUsers())
   }, [])
@@ -32,14 +32,13 @@ const Users = props => {
   </Message>);
   if (error) {
     pageBody = (<Message negative>
-      <Message.Header>We're sorry!</Message.Header>
+      <Message.Header>{`We're sorry!`}</Message.Header>
       <p>{fetch.error}</p>
     </Message>);
-  } else if (usersArray) {
-    console.log(usersArray);
+  } else if (usersArray.length) {
     pageBody = (<Row align="center">
       {usersArray.map(user => (
-        <Col align='center' xs={12} sm={6} md={3} style={{ "marginTop": "10px", "marginBottom": "5px" }}>
+        <Col key={user.email} align='center' xs={12} sm={6} md={3} style={{ "marginTop": "10px", "marginBottom": "5px" }}>
           <User
             key={user.email}
             user={user}
@@ -73,6 +72,10 @@ const Users = props => {
       </Row>
     </div>
   )
+}
+
+Users.propTypes = {
+  history : PropTypes.object
 }
 
 export default Users;

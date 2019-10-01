@@ -1,5 +1,6 @@
 import React from 'react';
 import { Rating } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 const book = ({ book, onClickEvent }) => (
   <tr onClick={() => onClickEvent(book.isbn)}>
@@ -31,4 +32,8 @@ const book = ({ book, onClickEvent }) => (
   </tr>
 )
 
+book.propTypes = {
+  onClickEvent: PropTypes.func,
+  book: PropTypes.object
+}
 export default book;
