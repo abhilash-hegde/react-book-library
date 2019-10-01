@@ -5,6 +5,7 @@ import 'semantic-ui-css/semantic.min.css';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as actions from '../../store/actions';
+import PropTypes from 'prop-types';
 
 const Login = props => {
   const dispatch = useDispatch();
@@ -38,16 +39,13 @@ const Login = props => {
   })
 
   useEffect(() =>{
-    console.log(authRedirectPath)
     if (authRedirectPath !== '/') {
-      console.log("setAuthRedirectPath")
       dispatch(actions.setAuthRedirectPath('/'));
     }
   }, [])
 
   useEffect(() =>{
     if (props.isSignup) {
-      console.log("isAuthenticated....");
       dispatch(actions.createUser({ userId: localStorage.userId, email: emailId, role: "user" }))
     }
   }, [])
@@ -173,6 +171,10 @@ const Login = props => {
         </Container>
       </div>
     );
+}
+
+Login.propTypes = {
+  isSignup: PropTypes.bool
 }
 
 export default Login;

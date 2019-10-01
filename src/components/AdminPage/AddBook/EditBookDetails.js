@@ -49,8 +49,7 @@ const editBookDetails = props => {
     dispatch(actions.uploadBookImage(selectedImage, props.isbn));
   }
 
-  const onSubmitHandler = (event) => {
-    console.log(event.target);
+  const onSubmitHandler = () => {
     const book = {
       isbn: props.isbn,
       title,
@@ -86,7 +85,7 @@ const editBookDetails = props => {
     </Message>);
   } else if (props.isbn) {
     bookComp = (<Transition.Group animation="horizontal flip" duration="600">
-      <Form onSubmit={(event) => onSubmitHandler(event)}>
+      <Form onSubmit={() => onSubmitHandler()}>
         <Form.Group widths='equal'>
           <Form.Input fluid disabled key="ISBN" label='ISBN'
             placeholder='ISBN'

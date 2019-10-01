@@ -2,6 +2,8 @@ import React from 'react';
 import { Item, Comment } from 'semantic-ui-react';
 import image from '../../../../public/img/avatars/8.jpg';
 import { Rate } from 'antd';
+import PropTypes from 'prop-types';
+
 
 export const Review = ({ review }) => (
   <Comment>
@@ -19,6 +21,9 @@ export const Review = ({ review }) => (
   </Comment>
 );
 
+Review.propTypes = {
+  review : PropTypes.object
+}
 export const ItemDetails = ({ book }) => (
   <Item.Group>
     <Item key={book.isbn}>
@@ -34,3 +39,7 @@ export const ItemDetails = ({ book }) => (
     </Item>
   </Item.Group>
 ); 
+
+ItemDetails.propTypes = {
+  book : PropTypes.object
+}

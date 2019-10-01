@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button, Icon, Card, Image } from 'semantic-ui-react';
 import { Rate } from 'antd';
+import PropTypes from 'prop-types';
 
 const mBook = props => {
   let issued = false;
-  console.log(props.issuedIsbnArray);
   if (props.issuedIsbnArray) {
     issued = props.issuedIsbnArray.includes(props.book.isbn) ? true : false;
   }
@@ -30,6 +30,15 @@ const mBook = props => {
       </Card.Content>
     </Card>
   )
+}
+
+mBook.propTypes = {
+  book : PropTypes.object,
+  issueBtnLoading: PropTypes.bool,
+  issueIsbn: PropTypes.string,
+  issueBook: PropTypes.func,
+  onClickEvent: PropTypes.func,
+  issuedIsbnArray: PropTypes.array,
 }
 
 export default mBook;

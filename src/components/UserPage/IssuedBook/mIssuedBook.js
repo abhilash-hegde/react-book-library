@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Card, Image } from 'semantic-ui-react';
 import { Badge } from 'reactstrap';
+import PropTypes from 'prop-types';
 
 const mIssuedBook = props => {
   const oneDay = 24 * 60 * 60 * 1000;
@@ -37,4 +38,14 @@ const mIssuedBook = props => {
   )
 }
 
+mIssuedBook.propTypes = {
+  book:PropTypes.object,
+  returnBook:PropTypes.func,
+  renewBook:PropTypes.func,
+  onClickEvent:PropTypes.func,
+  renewBtnLoading:PropTypes.bool,
+  returnBtnLoading:PropTypes.bool,
+  renewIsbn:PropTypes.string,
+  returnIsbn:PropTypes.string,
+}
 export default mIssuedBook;

@@ -1,9 +1,9 @@
 import React from 'react';
 import image from '../../../../public/img/avatars/8.png';
-import { Card, Icon } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 const user =  ({user, onClickEvent}) => {
-    console.log(user);
     return (
         <Card onClick={() => onClickEvent(user.userId)}
             image={user.image || image}
@@ -14,4 +14,9 @@ const user =  ({user, onClickEvent}) => {
         />
     );
 }
+user.propTypes = {
+    onClickEvent: PropTypes.func,
+    user: PropTypes.object
+}
+
 export default user;

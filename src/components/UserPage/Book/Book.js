@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Icon, Rating } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 const Book = props => {
   let issued = props.issuedIsbnArray.includes(props.book.isbn) ? true :false;
@@ -33,7 +34,7 @@ const Book = props => {
       <td>
         <Button color={issued ? 'green' : 'blue'} disabled={issued} icon labelPosition='right'
           loading={props.issueBtnLoading && (props.issueIsbn == props.book.isbn)}
-          onClick={e => props.issueBook(props.book)}>
+          onClick={() => props.issueBook(props.book)}>
           <Icon name={issued ? 'in cart' : 'add to cart'} />
           {issued ? 'Issued' : 'Issue'}</Button>
       </td>
@@ -41,4 +42,12 @@ const Book = props => {
   ) 
 }
 
+Book.propTypes = {
+  book : PropTypes.object,
+  issueBtnLoading: PropTypes.bool,
+  issueIsbn: PropTypes.string,
+  issueBook: PropTypes.func,
+  onClickEvent: PropTypes.func,
+  issuedIsbnArray: PropTypes.array,
+}
 export default Book;

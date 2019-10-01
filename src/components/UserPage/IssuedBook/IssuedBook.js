@@ -1,6 +1,7 @@
 import React from 'react';
 import {Badge} from 'reactstrap';
 import { Button } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 const issuedBook = ({book, returnBook, renewBook, renewBtnLoading, returnBtnLoading, renewIsbn, returnIsbn}) => {
 
@@ -42,15 +43,25 @@ const issuedBook = ({book, returnBook, renewBook, renewBtnLoading, returnBtnLoad
       </td>
       <td>
       <Button.Group>
-      <Button loading={renewBtnLoading && (renewIsbn == book.isbn)} onClick={e => renewBook(book)}>
+      <Button loading={renewBtnLoading && (renewIsbn == book.isbn)} onClick={() => renewBook(book)}>
       <i className="fa fa-refresh"></i> Renew</Button>
       <Button.Or />
-      <Button loading={returnBtnLoading && (returnIsbn == book.isbn) } negative onClick={e => returnBook(book)}>
+      <Button loading={returnBtnLoading && (returnIsbn == book.isbn) } negative onClick={() => returnBook(book)}>
       <i className="fa fa-chevron-circle-right"></i> Return</Button>
       </Button.Group>
       </td>
     </tr>
 )
+}
+
+issuedBook.propTypes = {
+  book:PropTypes.object,
+  returnBook:PropTypes.func,
+  renewBook:PropTypes.func,
+  renewBtnLoading:PropTypes.bool,
+  returnBtnLoading:PropTypes.bool,
+  renewIsbn:PropTypes.string,
+  returnIsbn:PropTypes.string,
 }
 
 export default issuedBook;
