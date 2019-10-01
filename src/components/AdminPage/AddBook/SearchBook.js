@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Input } from 'semantic-ui-react';
 import { Visible, Row, Col } from 'react-grid-system';
+import PropTypes from 'prop-types';
 
 const searchBook = ({ onSearchEvent, isbn, onClickEvent, onIsbnChange }) => {
   return (
@@ -19,6 +20,11 @@ const searchBook = ({ onSearchEvent, isbn, onClickEvent, onIsbnChange }) => {
       </Col>
     </Row>)
 }
+searchBook.propTypes = {
+  onSearchEvent: PropTypes.func,
+  isbn:PropTypes.string,
+  onClickEvent: PropTypes.func,
+  onIsbnChange: PropTypes.func,
+}
 
-
-export default searchBook
+export default searchBook;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Badge } from 'reactstrap';
+import PropTypes from 'prop-types';
 
 const bookIssued = ({ book }) => {
 
@@ -39,6 +40,9 @@ const bookIssued = ({ book }) => {
       </td>
     </tr>
   )
+}
+bookIssued.propTypes = {
+  book: PropTypes.object
 }
 
 export default bookIssued;

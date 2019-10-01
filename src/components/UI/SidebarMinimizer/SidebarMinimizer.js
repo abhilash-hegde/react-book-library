@@ -1,20 +1,18 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class SidebarMinimizer extends Component {
+const SidebarMinimizer = () => {
 
-  sidebarMinimize() {
+  const sidebarMinimize = () => {
     document.body.classList.toggle('sidebar-minimized');
   }
 
-  brandMinimize() {
+  const brandMinimize = () => {
     document.body.classList.toggle('brand-minimized');
   }
 
-  render() {
-    return (
-      <button className="sidebar-minimizer" type="button" onClick={(event) => { this.sidebarMinimize(); this.brandMinimize() }}></button>
-    )
-  }
+  return (
+    <button className="sidebar-minimizer" type="button" onClick={() => { sidebarMinimize(); brandMinimize() }}></button>
+  )
 }
 
 export default SidebarMinimizer;
