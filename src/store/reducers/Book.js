@@ -24,7 +24,7 @@ const initialState = {
 |--------------------------------------------------
 */
 
-const fetchBooksStart = (state, action) => updateObject(state,
+const fetchBooksStart = state => updateObject(state,
   { fetch: { loading: true, error: null, success: false } });
 
 const fetchBooksSuccess = (state, action) => {
@@ -41,7 +41,7 @@ const fetchBooksFail = (state, action) => updateObject(state,
 |--------------------------------------------------
 */
 
-const fetchIssuedBooksStart = (state, action) => updateObject(state,
+const fetchIssuedBooksStart = state => updateObject(state,
   { fetchIssued: { loading: true, error: null, success: false } });
 
 const fetchIssuedBooksSuccess = (state, action) => updateObject(state,
@@ -87,11 +87,11 @@ const updateBookReviewSuccess = (state, action) => updateObject(state, {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case actionTypes.FETCH_BOOKS_START: return fetchBooksStart(state, action);
+    case actionTypes.FETCH_BOOKS_START: return fetchBooksStart(state);
      case actionTypes.FETCH_BOOKS_SUCCESS: return fetchBooksSuccess(state, action);
     case actionTypes.FETCH_BOOKS_FAIL: return fetchBooksFail(state, action);
 
-    case actionTypes.FETCH_ISSUEDBOOKS_START: return fetchIssuedBooksStart(state, action);
+    case actionTypes.FETCH_ISSUEDBOOKS_START: return fetchIssuedBooksStart(state);
     case actionTypes.FETCH_ISSUEDBOOKS_SUCCESS: return fetchIssuedBooksSuccess(state, action);
     case actionTypes.FETCH_ISSUEDBOOKS_FAIL: return fetchIssuedBooksFail(state, action);
 

@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/ActionTypes';
-import { updateObject, removeObject } from '../utility';
+import { updateObject } from '../utility';
 
 const initialState = {
   user: {
@@ -22,7 +22,7 @@ const initialState = {
 |--------------------------------------------------
 */
 
-const uploadBookImagesStart = (state, action) => updateObject(state,
+const uploadBookImagesStart = state => updateObject(state,
   { book: { url: null, progress: null, loading: true, error: null } });
 
 const uploadBookImagesProgress = (state, action) => updateObject(state,
@@ -40,7 +40,7 @@ const uploadBookImagesFail = (state, action) => updateObject(state,
 |--------------------------------------------------
 */
 
-const uploadUserImageStart = (state, action) => updateObject(state,
+const uploadUserImageStart = state => updateObject(state,
   { user: { url: null, progress: null, loading: true, error: null } });
 
 const uploadUserImageProgress = (state, action) => updateObject(state,
@@ -56,12 +56,12 @@ const uploadUserImageFail = (state, action) => updateObject(state,
 
 const imagesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.UPLOAD_BOOK_IMAGE_START: return uploadBookImagesStart(state, action);
+    case actionTypes.UPLOAD_BOOK_IMAGE_START: return uploadBookImagesStart(state);
     case actionTypes.UPLOAD_BOOK_IMAGE_PROGRESS: return uploadBookImagesProgress(state, action);
     case actionTypes.UPLOAD_BOOK_IMAGE_SUCCESS: return uploadBookImagesSuccess(state, action);
     case actionTypes.UPLOAD_BOOK_IMAGE_FAIL: return uploadBookImagesFail(state, action);
 
-    case actionTypes.UPLOAD_USER_IMAGE_START: return uploadUserImageStart(state, action);
+    case actionTypes.UPLOAD_USER_IMAGE_START: return uploadUserImageStart(state);
     case actionTypes.UPLOAD_USER_IMAGE_PROGRESS: return uploadUserImageProgress(state, action);
     case actionTypes.UPLOAD_USER_IMAGE_SUCCESS: return uploadUserImageSuccess(state, action);
     case actionTypes.UPLOAD_USER_IMAGE_FAIL: return uploadUserImageFail(state, action);

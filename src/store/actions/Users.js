@@ -18,8 +18,6 @@ export const createUserFail = (error) => ({
 })
 
 export const createUser = (user, expiresIn) => (dispatch) => {
-    console.log(user);
-    console.log(expiresIn);
     dispatch(createUserStart());
     const ref = firebase.database().ref('/users');
     ref.child(localStorage.userId).set(user).then(() => {

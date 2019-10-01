@@ -24,7 +24,6 @@ export const addBookFail = error => {
 }
 
 export const addBook = book => {
-    console.log(book);
     return (dispatch) => {
         dispatch(addBookStart(book));
         const ref = firebase.database().ref('/books');
@@ -37,13 +36,13 @@ export const addBook = book => {
     }
 }
 
-export const deleteBookStart = book => {
+export const deleteBookStart = () => {
     return {
         type: ActionTypes.ADD_BOOK_START,
     }
 }
 
-export const deleteBookSuccess = book => {
+export const deleteBookSuccess = () => {
     return {
         type: ActionTypes.ADD_BOOK_SUCCESS,
     }
@@ -57,7 +56,6 @@ export const deleteBookFail = error => {
 }
 
 export const deleteBook = book => {
-    console.log(book);
     return (dispatch) => {
         dispatch(addBookStart(book));
         const ref = firebase.database().ref('/books');
@@ -105,14 +103,12 @@ export const updateBook = book => {
 }
 
 export const fetchIsbnStart = () => {
-    console.log('fetchIsbnStart');
     return {
         type: ActionTypes.FETCH_ISBN_START
     }
 };
 
 export const fetchIsbnSuccess = (book) => {
-    console.log(book);
     return {
         type: ActionTypes.FETCH_ISBN_SUCCESS,
         book: book
@@ -120,7 +116,6 @@ export const fetchIsbnSuccess = (book) => {
 };
 
 export const fetchIsbnFail = (error) => {
-    console.log(error);
     return {
         type: ActionTypes.FETCH_ISBN_FAIL,
         error: error
@@ -132,7 +127,6 @@ export const fetchIsbn = (isbn) => {
         dispatch(fetchIsbnStart());
         return Axios.get("https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn)
             .then(response => {
-                console.log(response);
                 (response.data.totalItems == 0) ? dispatch(fetchIsbnFail("Invalid ISBN")) : dispatch(fetchIsbnSuccess(response.data.items[0]))
             }).catch(error => {
                 dispatch(fetchIsbnFail(error.message))

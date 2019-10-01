@@ -23,7 +23,7 @@ const searchFilterOptions = [
 const Books = props => {
   const [genreFilter, setGenreFilter] = useState("All");
   const [searchFilter, setSearchFilter] = useState("author");
-  const [filteredBooks, setFilteredBooks] = useState(null);
+  const [filteredBooks, setFilteredBooks] = useState([]);
   const [categories, setCategories] = useState([]);
   const [search, setSearch] = useState("");
   const [searchFilterLoading, setSearchFilterLoading] = useState(false);
@@ -103,7 +103,7 @@ const Books = props => {
         <p>{error}</p>
       </Message>);
     } else if (success && books.length) {
-      const bookBigScr = (<Table hover responsive className="table-outline mb-0 d-none d-sm-table">
+      const bookBigScr = filteredBooks.length ? (<Table hover responsive className="table-outline mb-0 d-none d-sm-table">
         <thead className="thead-light">
           <tr>
             <th className="text-center"><i className="icon-people"></i></th>
@@ -115,13 +115,16 @@ const Books = props => {
           </tr>
         </thead>
         <tbody>
-          {filteredBooks.map((book) => <Book key={book.isbn} book={book}
+          {filteredBooks.map(book => <Book key={book.isbn} book={book}
             onClickEvent={isbn => props.history.push('/admin/editBook/' + isbn)} />
           )}
         </tbody>
-      </Table>);
+      </Table>): <Message warning>
+          <Message.Header> Sorry</Message.Header>
+          <p>No results found..!</p>
+        </Message>
 
-      const bookSmallScr = filteredBooks ? (filteredBooks.map((book) =>
+      const bookSmallScr = filteredBooks.length ? (filteredBooks.map(book =>
         <Col key={book.isbn} align='center' sm={6} style={{ "marginTop": "10px", "marginBottom": "3px" }}>
           <BookM key={book.isbn} book={book}
             onClickEvent={isbn => props.history.push('/admin/editBook/' + isbn)} />

@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/ActionTypes';
-import { updateObject, removeObject } from '../utility';
+import { updateObject } from '../utility';
 
 const initialState = {
 
@@ -35,10 +35,10 @@ const initialState = {
 |--------------------------------------------------
 */
 
-const addBookStart = (state, action) => updateObject(state,
+const addBookStart = state => updateObject(state,
   { add: { loading: true, error: null, success: false } });
 
-const addBookSuccess = (state, action) => updateObject(state,
+const addBookSuccess = state => updateObject(state,
   { add: { loading: false, error: null, success: true } });
 
 const addBookFail = (state, action) => updateObject(state,
@@ -50,10 +50,10 @@ const addBookFail = (state, action) => updateObject(state,
 |--------------------------------------------------
 */
 
-const updateBookStart = (state, action) => updateObject(state,
+const updateBookStart = state => updateObject(state,
   { update: { loading: true, error: null, success: false } });
 
-const updateBookSuccess = (state, action) => updateObject(state,
+const updateBookSuccess = state => updateObject(state,
   { update: { loading: false, error: null, success: true } });
 
 const updateBookFail = (state, action) => updateObject(state,
@@ -64,15 +64,16 @@ const updateBookFail = (state, action) => updateObject(state,
 | Delete Book
 |--------------------------------------------------
 */
+// TODO
 
-const deleteBookStart = (state, action) => deleteObject(state,
-  { delete: { loading: true, error: null, success: false } });
+// const deleteBookStart = (state, action) => deleteObject(state,
+//   { delete: { loading: true, error: null, success: false } });
 
-const deleteBookSuccess = (state, action) => deleteObject(state,
-  { delete: { loading: false, error: null, success: true } });
+// const deleteBookSuccess = (state, action) => deleteObject(state,
+//   { delete: { loading: false, error: null, success: true } });
 
-const deleteBookFail = (state, action) => deleteObject(state,
-  { delete: { loading: false, error: action.error, success: false } });
+// const deleteBookFail = (state, action) => deleteObject(state,
+//   { delete: { loading: false, error: action.error, success: false } });
 
 /**
 |--------------------------------------------------
@@ -80,7 +81,7 @@ const deleteBookFail = (state, action) => deleteObject(state,
 |--------------------------------------------------
 */
 
-const fetchIsbnStart = (state, action) => updateObject(state,
+const fetchIsbnStart = state => updateObject(state,
   { fetchGoogleApi: { loading: true, error: null, success: false, books: null } });
 
 const fetchIsbnSuccess = (state, action) => updateObject(state,
@@ -92,15 +93,15 @@ const fetchIsbnFail = (state, action) => updateObject(state,
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.ADD_BOOK_START: return addBookStart(state, action);
-    case actionTypes.ADD_BOOK_SUCCESS: return addBookSuccess(state, action);
+    case actionTypes.ADD_BOOK_START: return addBookStart(state);
+    case actionTypes.ADD_BOOK_SUCCESS: return addBookSuccess(state);
     case actionTypes.ADD_BOOK_FAIL: return addBookFail(state, action);
 
-    case actionTypes.UPDATE_BOOK_START: return updateBookStart(state, action);
-    case actionTypes.UPDATE_BOOK_SUCCESS: return updateBookSuccess(state, action);
+    case actionTypes.UPDATE_BOOK_START: return updateBookStart(state);
+    case actionTypes.UPDATE_BOOK_SUCCESS: return updateBookSuccess(state);
     case actionTypes.UPDATE_BOOK_FAIL: return updateBookFail(state, action);
 
-    case actionTypes.FETCH_ISBN_START: return fetchIsbnStart(state, action);
+    case actionTypes.FETCH_ISBN_START: return fetchIsbnStart(state);
     case actionTypes.FETCH_ISBN_SUCCESS: return fetchIsbnSuccess(state, action);
     case actionTypes.FETCH_ISBN_FAIL: return fetchIsbnFail(state, action);
 

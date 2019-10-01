@@ -59,14 +59,12 @@ export const auth = (email, password, isSignup) => {
         localStorage.setItem('expirationDate', expirationDate)
         localStorage.setItem('userId', response.data.localId)
         if (isSignup) {
-          console.log("yes...");
           dispatch(actions.createUser({ userId: response.data.localId, email: email, role: "user" }, response.data.expiresIn))
         }else{
           dispatch(authSuccess(response.data.idToken, response.data.localId))      
         }
       })
       .catch(err => {
-        console.log(err);
         dispatch(authFail(err.response.data.error))
       })
   }

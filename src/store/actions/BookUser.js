@@ -13,25 +13,20 @@ export const issueBookFail = (error) => (
 export const issueBook = (book, availableBooks) => {
     return (dispatch) => {
         dispatch(issueBookStart(book.isbn));
-        console.log(availableBooks);
         const ref = firebase.database().ref('/issuedBooks/' + localStorage.userId);
         console.log(ref)
         const ref1 = firebase.database().ref('/books/' + book.isbn + '/available');
         ref.child(book.isbn).set(book).then(() => {
             console.log(ref1)
             ref1.set(availableBooks - 1).then(() => {
-                console.log("issueBookSuccess")
                 dispatch(issueBookSuccess(book))
             }).catch(error => {
-                console.log("issueBookFail1");
                 dispatch(issueBookFail(error.message));
             });
         })
             .catch(error => {
-                console.log("issueBookFail2");                
                 dispatch(issueBookFail(error.message));
             });
-        console.log(availableBooks);
     };
 };
 
@@ -127,16 +122,13 @@ export const updateBookReviewFail = error => {
 }
 
 export const updateBookReview = (review, isbn) => {
-    console.log(isbn);
     return (dispatch) => {
         dispatch(updateBookReviewStart());
         const ref = firebase.database().ref('/books');
         ref.child(isbn).child("reviews").child(localStorage.userId).set(review).then(() => {
-            console.log("succuss");
             dispatch(updateBookReviewSuccess(review, isbn))
         })
             .catch(error => {
-                console.log(err);
                 dispatch(updateBookReviewFail(error.message));
             });
     }

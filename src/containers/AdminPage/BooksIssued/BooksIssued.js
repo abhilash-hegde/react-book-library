@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import {
@@ -9,7 +9,7 @@ import {
   CardBody,
   Table
 } from 'reactstrap';
-
+import PropTypes from 'prop-types';
 import Book from '../../../components/AdminPage/BookIssued/BookIssued';
 import * as actions from '../../../store/actions';
 import { Message, Icon } from 'semantic-ui-react';
@@ -35,13 +35,13 @@ const BooksIssued = props => {
         <Icon name='circle notched' loading />
         <Message.Content>
           <Message.Header>Just one second</Message.Header>
-          We are fetching user's library for you.
+          {`We are fetching user's library for you.`}
         </Message.Content>
       </Message>
     );
   } else if (error) {
     issuedBookBody = (<Message negative>
-      <Message.Header>We're sorry!</Message.Header>
+      <Message.Header>{`We're sorry!`}</Message.Header>
       <p>{error}</p>
     </Message>);
   } else {
@@ -98,4 +98,7 @@ const BooksIssued = props => {
   )
 }
 
+BooksIssued.propTypes = {
+  match: PropTypes.object
+}
 export default BooksIssued;

@@ -29,7 +29,7 @@ const initialState = {
 |--------------------------------------------------
 */
 
-const fetchUsersStart = (state, action) => updateObject(state,
+const fetchUsersStart = (state) => updateObject(state,
   { fetch: { loading: true, error: null, success: false } });
 
 const fetchUsersSuccess = (state, action) => updateObject(state,
@@ -44,7 +44,7 @@ const fetchUsersFail = (state, action) => updateObject(state,
 |--------------------------------------------------
 */
 
-const createUserStart = (state, action) => updateObject(state,
+const createUserStart = (state) => updateObject(state,
   { create: { loading: true, error: null, success: false } });
 
 const createUserSuccess = (state, action) => updateObject(state, {
@@ -61,7 +61,7 @@ const createUserFail = (state, action) => updateObject(state,
 |--------------------------------------------------
 */
 
-const updateUserStart = (state, action) => updateObject(state,
+const updateUserStart = (state) => updateObject(state,
   { update: { loading: true, error: null, success: false } });
 
 const updateUserSuccess = (state, action) => updateObject(state, {
@@ -75,15 +75,15 @@ const updateUserFail = (state, action) => updateObject(state,
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.FETCH_USERS_START: return fetchUsersStart(state, action);
+    case actionTypes.FETCH_USERS_START: return fetchUsersStart(state);
     case actionTypes.FETCH_USERS_SUCCESS: return fetchUsersSuccess(state, action);
     case actionTypes.FETCH_USERS_FAIL: return fetchUsersFail(state, action);
 
-    case actionTypes.UPDATE_USER_START: return updateUserStart(state, action);
+    case actionTypes.UPDATE_USER_START: return updateUserStart(state);
     case actionTypes.UPDATE_USER_SUCCESS: return updateUserSuccess(state, action);
     case actionTypes.UPDATE_USER_FAIL: return updateUserFail(state, action);
 
-    case actionTypes.CREATE_USER_START: return createUserStart(state, action);
+    case actionTypes.CREATE_USER_START: return createUserStart(state);
     case actionTypes.CREATE_USER_SUCCESS: return createUserSuccess(state, action);
     case actionTypes.CREATE_USER_FAIL: return createUserFail(state, action);
 

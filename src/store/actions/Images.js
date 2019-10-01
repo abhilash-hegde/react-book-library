@@ -1,5 +1,4 @@
 import * as ActionTypes from './ActionTypes';
-import Axios from 'axios';
 import firebase from '../../fire';
 
 export const uploadBookImageStart = () => {
@@ -30,10 +29,8 @@ export const uploadBookImageFail = (error) => {
 };
 
 export const uploadBookImage = (image, isbn) => {
-  console.log(image);
   return (dispatch) => {
     dispatch(uploadBookImageStart());
-
     const storageRef = firebase.storage().ref("books/" + isbn + ".jpg");
     const task = storageRef.put(image);
     task.on('state_changed',
@@ -46,7 +43,6 @@ export const uploadBookImage = (image, isbn) => {
       },
       function complete() {
         task.snapshot.ref.getDownloadURL().then(url => {
-          console.log(url);
           dispatch(uploadBookImageSuccess(url))
         }).catch(error => {
           dispatch(uploadBookImageFail(error.message))
@@ -99,7 +95,6 @@ export const uploadUserImage = (image) => {
       },
       function complete() {
         task.snapshot.ref.getDownloadURL().then(url => {
-          console.log(url);
           dispatch(uploadUserImageSuccess(url))
         }).catch(error => {
           dispatch(uploadUserImageFail(error.message))
