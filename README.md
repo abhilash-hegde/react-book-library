@@ -1,7 +1,7 @@
 # React-Book-Library
 Book library app created using React, Redux and Firebase
 
-[![DeepScan grade](https://deepscan.io/api/teams/5583/projects/7422/branches/74811/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=5583&pid=7422&bid=74811)
+[![DeepScan grade](https://deepscan.io/api/teams/5583/projects/7422/branches/74811/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=5583&pid=7422&bid=74811) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8d282a5c226c4e8b87c3fee3cf001d80)](https://www.codacy.com/manual/abhilash-hegde/react-book-library?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=abhilash-hegde/react-book-library&amp;utm_campaign=Badge_Grade)
 
 ## USER - Login & SignUp
 * user can log-in using email-id and password.
