@@ -1,6 +1,8 @@
 # React-Book-Library
 Book library app created using React, Redux and Firebase
 
+[![DeepScan grade](https://deepscan.io/api/teams/5583/projects/7422/branches/74811/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=5583&pid=7422&bid=74811)
+
 ## USER - Login & SignUp
 * user can log-in using email-id and password.
 * If you are using it for the first time, you can sign up using your email-id and password.
