@@ -96,13 +96,17 @@ const Books = props => {
       </Message.Content>
     </Message>
   );
+  console.log(loading);
+  console.log(success);
+  console.log(books);
+  console.log(filteredBooks);
   if (!loading) {
     if (error) {
       bookBody = (<Message negative>
         <Message.Header>{`We're sorry!`}</Message.Header>
         <p>{error}</p>
       </Message>);
-    } else if (success && books.length) {
+    } else if (success && books) {
       const bookBigScr = filteredBooks.length ? (<Table hover responsive className="table-outline mb-0 d-none d-sm-table">
         <thead className="thead-light">
           <tr>
@@ -204,7 +208,7 @@ const Books = props => {
         <Visible md lg xl>{bookBigScr} </Visible>
       </div>
       );
-    } else if (success && !books.length) {
+    } else if (success && !books) {
       bookBody = (
         <Message warning>
           <Message.Header> Empty!</Message.Header>

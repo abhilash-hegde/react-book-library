@@ -4,21 +4,24 @@ const dotenv = require('dotenv');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+require('style-loader/lib/addStyles');
+require('css-loader/lib/css-base');
 
-const extractCSS = new ExtractTextPlugin('[name].fonts.css');
-const extractSCSS = new ExtractTextPlugin('[name].styles.css');
+const extractCSS = new ExtractTextPlugin({
+  filename: '[name].fonts.css',
+  allChunks: true
+}
+  );
+const extractSCSS = new ExtractTextPlugin({
+  filename: '[name].styles.css',
+  allChunks: true
+});
 
 const BUILD_DIR = path.resolve(__dirname, 'build');
 const SRC_DIR = path.resolve(__dirname, 'src');
 
-console.log('BUILD_DIR', BUILD_DIR);
-console.log('SRC_DIR', SRC_DIR);
-
 module.exports = (env = {}) => {
-  // call dotenv and it will return an Object with a parsed key 
   const env_var = dotenv.config().parsed;
-
-  // reduce it to a nice object, the same as before
   const envKeys = Object.keys(env_var).reduce((prev, next) => {
     prev[`process.env.${next}`] = JSON.stringify(env_var[next]);
     return prev;
@@ -49,7 +52,7 @@ module.exports = (env = {}) => {
             loader: 'babel-loader',
             options: {
               cacheDirectory: true,
-              presets: ['react', 'env', 'stage-2']
+              presets: ["@babel/preset-react", "@babel/preset-env"]
             }
           }
         },

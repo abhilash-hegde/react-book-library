@@ -27,8 +27,9 @@ const Profile = () => {
         imgProgress: state.images.user.progress,
         imgError: state.images.user.error
     }), shallowEqual)
-    const { updatedUser, updateLoading, updateError } = useSelector(state => ({
+    const { updatedUser, updateSuccess, updateLoading, updateError } = useSelector(state => ({
         updatedUser: state.users.update.user,
+        updateSuccess: state.users.update.success,
         updateLoading: state.users.update.loading,
         updateError: state.users.update.error
     }), shallowEqual)
@@ -49,13 +50,17 @@ const Profile = () => {
     }, [imgUrl])
 
     useEffect(() => {
-        successNotification("User updated succesfully!");
-        setModifiedUser(state => ({ ...state, ...updatedUser }));
-    }, [updatedUser])
+        if(updateSuccess){
+            successNotification("User updated succesfully!");
+            setModifiedUser(state => ({ ...state, ...updatedUser }));
+        }
+    }, [updatedUser, updateSuccess])
 
     useEffect(() => {
-        successNotification(updateError);
-        setModifiedUser(state => ({ ...state, ...updatedUser }));
+        if(updateError){
+            successNotification(updateError);
+            setModifiedUser(state => ({ ...state, ...updatedUser }));
+        }
     }, [updateError])
 
     const inputChangedHandler = (event, name) => {
@@ -82,6 +87,7 @@ const Profile = () => {
         uploadingStatus = "exeption";
     }
     return (
+        modifiedUser ?
         <div className="animated fadeIn">
 
             <Row align="center">
@@ -171,7 +177,7 @@ const Profile = () => {
                     </OuterCard>
                 </Col>
             </Row>
-        </div>
+        </div> : null
     );
 }
 

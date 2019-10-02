@@ -40,14 +40,17 @@ class Header extends Component {
         <NavbarToggler className="d-md-down-none mr-auto" onClick={this.sidebarToggle}>
           <span className="navbar-toggler-icon"></span>
         </NavbarToggler>
-        <Nav className="d-md-down-none" navbar>
+        {this.props.isAdmin ? null :
+            <Nav className="d-md-down-none" navbar>
           <NavItem className="px-3">
-            <NavLink href="#/books">Books</NavLink>
+            <NavLink href="#/user/books">Books</NavLink>
           </NavItem>
           <NavItem className="px-3">
-            <NavLink href="#/myBooks">My Books</NavLink>
+            <NavLink href="#/user/myBooks">My Books</NavLink>
           </NavItem>
         </Nav>
+         }
+        
         <HeaderDropdown isAdmin={this.props.isAdmin}/>
         {/* <NavbarToggler className="d-md-down-none" onClick={this.asideToggle}>
           <span className="navbar-toggler-icon"></span>

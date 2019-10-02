@@ -28,7 +28,7 @@ const AdminPage = props => {
             <Switch>
               <Route path="/admin/books" name="Books" component={Books} />
               <Route path="/admin/addBook" name="AddBook" component={AddBook} />
-              <Route path="/admin/booksIssued/:userId" name="BooksIssued" component={BooksIssued} />
+              <Route path="/admin/users/booksIssued/:userId" name="BooksIssued" component={BooksIssued} />
               <Route path="/admin/editBook/:isbn" name="EditBook" component={EditBook} />
               <Route path="/admin/users" name="Users" component={Users} />
               <Route path="/admin/profile" name="Profile" component={Profile} />

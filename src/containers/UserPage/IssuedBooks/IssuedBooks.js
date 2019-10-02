@@ -36,6 +36,8 @@ const IssuedBooks = () => {
   }), shallowEqual);
 
   const libraryIssuedBooks = useSelector(state => state.library.issuedBooks, shallowEqual);
+  const libraryBooks = useSelector(state => state.library.books, shallowEqual);
+
 
   useEffect(() => {
     dispatch(actions.fetchIssuedBooks(localStorage.userId));
@@ -70,7 +72,7 @@ const IssuedBooks = () => {
     if (!isEqual(libraryIssuedBooks, issuedBooks)) {
       setIssuedBooks(libraryIssuedBooks)
     }
-  }, [fetchIssuedSuccess])
+  }, [fetchIssuedSuccess, returnSuccess, renewSuccess])
 
   const dateFormat = (delay) => {
     let date = new Date();
@@ -93,7 +95,7 @@ const IssuedBooks = () => {
       issuedDate: dateFormat(0),
       returnDate: dateFormat(15)
     }
-    dispatch(actions.returnBook(returnBook, libraryIssuedBooks[book.isbn].available))
+    dispatch(actions.returnBook(returnBook, libraryBooks[book.isbn].available))
   }
 
   let issuedBookArray = [];

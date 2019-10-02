@@ -39,7 +39,7 @@ const issuedBook = ({book, returnBook, renewBook, renewBtnLoading, returnBtnLoad
       </td>
   
       <td>
-      <Badge color={remainingDaysDadge} className="float-left">{remainingDays} {(remainingDays==1)?'day':'days'} Remaining</Badge>
+      <Badge color={remainingDaysDadge} className="float-left">{remainingDays} {(remainingDays==1)?'day':'days'} remaining</Badge>
       </td>
       <td>
       <Button.Group>

@@ -32,7 +32,6 @@ const App = () => {
       )
 
       if (isAuthenticated) {
-        console.log(users[localStorage.userId].role)
         routes = (
           <Switch>
             <Route path="/404" name="404" component={Page404} />
