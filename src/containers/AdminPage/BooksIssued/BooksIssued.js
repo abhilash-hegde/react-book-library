@@ -17,6 +17,7 @@ import { Message, Icon } from 'semantic-ui-react';
 const BooksIssued = props => {
   const dispatch = useDispatch();
   const user = props.match.params.userId;
+
   useEffect(() => {
     dispatch(actions.fetchIssuedBooks(user))
   }, []);
@@ -26,9 +27,11 @@ const BooksIssued = props => {
     loading: state.library.fetchIssued.loading,
     error: state.library.fetchIssued.error,
     success: state.library.fetchIssued.success,
-  }), shallowEqual)
+  }), shallowEqual);
+
   let issuedBookArray = [];
   let issuedBookBody = null;
+
   if (loading) {
     issuedBookBody = (
       <Message icon>
@@ -44,15 +47,15 @@ const BooksIssued = props => {
       <Message.Header>{`We're sorry!`}</Message.Header>
       <p>{error}</p>
     </Message>);
-  } else {
-    if (success && issuedBooks === null) {
+  } else if(success){
+    if (!issuedBooks) {
       issuedBookBody = (
         <Message warning>
           <Message.Header>Empty list!</Message.Header>
           <p>Books are not issued to this user.</p>
         </Message>
       );
-    } else {
+    } else if (issuedBooks) {
       Object.keys(issuedBooks).forEach(key => {
         issuedBookArray.push(issuedBooks[key]);
       });
@@ -86,7 +89,7 @@ const BooksIssued = props => {
         <Col>
           <Card>
             <CardHeader>
-              My Books
+              Issued Books
               </CardHeader>
             <CardBody>
               {issuedBookBody}

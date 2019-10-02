@@ -42,7 +42,7 @@ const Users = props => {
           <User
             key={user.email}
             user={user}
-            onClickEvent={userId => props.history.push('/admin/booksIssued/' + userId)} />
+            onClickEvent={userId => props.history.push('/admin/users/booksIssued/' + userId)} />
         </Col>))
       }
     </Row>);

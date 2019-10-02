@@ -14,10 +14,8 @@ export const issueBook = (book, availableBooks) => {
     return (dispatch) => {
         dispatch(issueBookStart(book.isbn));
         const ref = firebase.database().ref('/issuedBooks/' + localStorage.userId);
-        console.log(ref)
         const ref1 = firebase.database().ref('/books/' + book.isbn + '/available');
         ref.child(book.isbn).set(book).then(() => {
-            console.log(ref1)
             ref1.set(availableBooks - 1).then(() => {
                 dispatch(issueBookSuccess(book))
             }).catch(error => {

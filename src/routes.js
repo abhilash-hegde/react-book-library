@@ -7,7 +7,7 @@ const routes = {
   '/admin': "Admin",
   '/admin/books': 'Books',
   '/admin/users': 'Users',
-  '/admin/booksIssued': 'Books Issued',
+  '/admin/users/booksIssued': 'Books Issued',
   '/admin/addBook': 'Add Book',
   '/admin/editBook': 'Edit Book',
   '/admin/profile' : 'Profile'
