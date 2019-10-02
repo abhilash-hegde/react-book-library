@@ -77,7 +77,7 @@
     "react-star-rating-component": "^1.4.1",
     "react-super-responsive-table": "^4.3.12",
     "react-test-renderer": "^16.9.0",
-    "react-transition-group": "2.2.1",
+    "react-transition-group": "4.3.0",
     "reactstrap": "^5.0.0",
     "redux": "^4.0.4",
     "redux-thunk": "^2.2.0",
