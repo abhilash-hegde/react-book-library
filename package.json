@@ -82,7 +82,7 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.80.0",
+    "semantic-ui-react": "^0.88.1",
     "simple-line-icons": "2.4.1",
     "source-map-loader": "^0.2.4"
   },
