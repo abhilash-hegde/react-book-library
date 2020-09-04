@@ -56,7 +56,7 @@
     "label": "^0.2.2",
     "lodash": "^4.17.15",
     "material-ui": "1.0.0-beta.41",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "primereact": "^1.6.2",
     "prop-types": "^15.7.2",
     "react": "^16.10.1",
