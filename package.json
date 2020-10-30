@@ -42,7 +42,7 @@
     "@material-ui/icons": "1.0.0-beta.42",
     "ajv": "^6.10.2",
     "antd": "^3.23.4",
-    "axios": "^0.18.1",
+    "axios": "^0.21.0",
     "babel": "^6.23.0",
     "babel-preset-jest": "^23.2.0",
     "bootstrap": "4.3.1",
