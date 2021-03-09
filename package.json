@@ -57,7 +57,7 @@
     "lodash": "^4.17.15",
     "material-ui": "1.0.0-beta.41",
     "node-sass": "^4.12.0",
-    "primereact": "^1.6.2",
+    "primereact": "^6.1.0",
     "prop-types": "^15.7.2",
     "react": "^16.10.1",
     "react-chartjs-2": "2.7.0",
