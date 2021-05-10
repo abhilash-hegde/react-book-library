@@ -46,7 +46,7 @@
     "babel": "^6.23.0",
     "babel-preset-jest": "^23.2.0",
     "bootstrap": "4.3.1",
-    "chart.js": "2.7.1",
+    "chart.js": "2.9.4",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "flag-icon-css": "2.9.0",
